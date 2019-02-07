@@ -63,11 +63,11 @@ public class PlayerScript : NetworkBehaviour
                 break;
             //go back in scene via negative transform forward (reverse) * move Speed variable times delta Time
             case KeyCode.A:
-                rotation *= Quaternion.AngleAxis(-rotationSpeed, Vector3.up);
+                position += -transform.right * mSpeed * Time.deltaTime;
                 break;
             //rotation is timed and equal to the quaternion angle axis, turning counter clockwise
             case KeyCode.D:
-                rotation *= Quaternion.AngleAxis(rotationSpeed, Vector3.up);
+                position += transform.right * mSpeed * Time.deltaTime;
                 break;
             //rotation is timed and equal to the quaternion angle axis turning  clockwise
             case KeyCode.Space:
