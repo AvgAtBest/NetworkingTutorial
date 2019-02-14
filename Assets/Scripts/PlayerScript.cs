@@ -10,7 +10,7 @@ public class PlayerScript : NetworkBehaviour
     public float jumpHeight = 10f;
     public Rigidbody pRigid;
     public bool isGrounded = false;
-    
+    public string remoteLayerName = "RemotePlayer";
 	// Use this for initialization
 	void Start ()
     {
@@ -30,8 +30,9 @@ public class PlayerScript : NetworkBehaviour
         {
             cam.enabled = false;
             audioListener.enabled = false;
-
+            AssignRemoteLayer();
         }
+        RegisterPlayer();
 	}
 	
 	// Update is called once per frame
@@ -110,5 +111,14 @@ public class PlayerScript : NetworkBehaviour
     {
         //if the player is touching a collider, then isGrounded is true
         isGrounded = true;
+    }
+    void RegisterPlayer()
+    {
+        string ID = "Player" + GetComponent<NetworkIdentity>().netId;
+        this.name = ID;
+    }
+    void AssignRemoteLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer(remoteLayerName);
     }
 }
